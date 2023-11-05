@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>G20 Census Population 2000-2020</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+
+<body>
+    <div>
+        <label for="checkAll">Select All</label>
+        <input type="checkbox" id="checkAll" name="checkAll" onclick="selectAll()" checked>
+    </div>
+    <div>
+        <label for="checkArgentina">Argentina</label>
+        <input type="checkbox" id="checkArgentina" name="checkArgentina" onclick="showHide('Argentina')" checked>
+        <label for="checkAustralia">Australia</label>
+        <input type="checkbox" id="checkAustralia" name="checkAustralia" onclick="showHide('Australia')" checked>
+        <label for="checkBrazil">Brazil</label>
+        <input type="checkbox" id="checkBrazil" name="checkBrazil" onclick="showHide('Brazil')" checked>
+        <label for="checkCanada">Canada</label>
+        <input type="checkbox" id="checkCanada" name="checkCanada" onclick="showHide('Canada')" checked>
+        <label for="checkChina">China</label>
+        <input type="checkbox" id="checkChina" name="checkChina" onclick="showHide('China')" checked>
+        <label for="checkFrance">France</label>
+        <input type="checkbox" id="checkFrance" name="checkFrance" onclick="showHide('France')" checked>
+        <label for="checkGermany">Germany</label>
+        <input type="checkbox" id="checkGermany" name="checkGermany" onclick="showHide('Germany')" checked>
+        <label for="checkIndia">India</label>
+        <input type="checkbox" id="checkIndia" name="checkIndia" onclick="showHide('India')" checked>
+        <label for="checkIndonesia">Indonesia</label>
+        <input type="checkbox" id="checkIndonesia" name="checkIndonesia" onclick="showHide('Indonesia')" checked>
+        <label for="checkItaly">Italy</label>
+        <input type="checkbox" id="checkItaly" name="checkItaly" onclick="showHide('Italy')" checked>
+        <label for="checkJapan">Japan</label>
+        <input type="checkbox" id="checkJapan" name="checkJapan" onclick="showHide('Japan')" checked>
+        <label for="checkMexico">Mexico</label>
+        <input type="checkbox" id="checkMexico" name="checkMexico" onclick="showHide('Mexico')" checked>
+        <label for="checkRussia">Russia</label>
+        <input type="checkbox" id="checkRussia" name="checkRussia" onclick="showHide('Russia')" checked>
+        <label for="checkSaudi Arabia">Saudi Arabia</label>
+        <input type="checkbox" id="checkSaudi Arabia" name="checkSaudi Arabia" onclick="showHide('Saudi Arabia')" checked>
+        <label for="checkSouth Africa">South Africa</label>
+        <input type="checkbox" id="checkSouth Africa" name="checkSouth Africa" onclick="showHide('South Africa')" checked>
+        <label for="checkSouth Korea">South Korea</label>
+        <input type="checkbox" id="checkSouth Korea" name="checkSouth Korea" onclick="showHide('South Korea')" checked>
+        <label for="checkTurkey">Turkey</label>
+        <input type="checkbox" id="checkTurkey" name="checkTurkey" onclick="showHide('Turkey')" checked>
+        <label for="checkUnited Kingdom">United Kingdom</label>
+        <input type="checkbox" id="checkUnited Kingdom" name="checkUnited Kingdom" onclick="showHide('United Kingdom')" checked>
+        <label for="checkUnited States">United States</label>
+        <input type="checkbox" id="checkUnited States" name="checkUnited States" onclick="showHide('United States')" checked>
+    </div>
+    <div id="chart" style="width:1000px;height:500px;"></div>
+    <script>
+        var data = [
+            { "name": "Argentina", "data": [37057452, 40117092, 42708133, 44938712], "visible": true },
+            { "name": "Australia", "data": [19153000, 20481200, 22917400, 24982688], "visible": true },
+            { "name": "Brazil", "data": [175287587, 184184074, 192408743, 209469333], "visible": true },
+            { "name": "Canada", "data": [30957444, 31540746, 32388003, 37279811], "visible": true },
+            { "name": "China", "data": [1303720000, 1313526393, 1324655000, 1392730000], "visible": true },
+            { "name": "France", "data": [60414000, 61549652, 65711998, 66992699], "visible": true },
+            { "name": "Germany", "data": [82114224, 83167268, 81802257, 82927922], "visible": true },
+            { "name": "India", "data": [1053050915, 1210573948, 1301687328, 1352642280], "visible": true },
+            { "name": "Indonesia", "data": [210048743, 229004472, 245452739, 267670543], "visible": true },
+            { "name": "Italy", "data": [56942111, 58143979, 59554021, 60418692], "visible": true },
+            { "name": "Japan", "data": [126843000, 127596152, 127761004, 126529100], "visible": true },
+            { "name": "Mexico", "data": [100349766, 107449525, 114815427, 126190788], "visible": true },
+            { "name": "Russia", "data": [146028812, 145470197, 145274947, 144478050], "visible": true },
+            { "name": "Saudi Arabia", "data": [20269238, 24408733, 28828870, 33699947], "visible": true },
+            { "name": "South Africa", "data": [45064915, 50177336, 52981991, 57779622], "visible": true },
+            { "name": "South Korea", "data": [47621697, 47924632, 48792244, 51635256], "visible": true },
+            { "name": "Turkey", "data": [68347905, 69107555, 71158647, 82319724], "visible": true },
+            { "name": "United Kingdom", "data": [59081333, 60846820, 62662035, 66460604], "visible": true },
+            { "name": "United States", "data": [282171957, 295516599, 308097758, 327167434], "visible": true }
+        ];
+
+        var chart = Highcharts.chart('chart', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'G20 Census Population 2000-2020'
+            },
+            xAxis: {
+                categories: ['2000', '2010', '2018', '2020']
+            },
+            yAxis: {
+                title: {
+                    text: 'Population'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value / 1000000 + 'm';
+                    }
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: true
+                    },
+                    enableMouseTracking: true
+                }
+            },
+            series: data
+        });
+
+        function showHide(name) {
+            var seriesIndex = findSeriesIndex(name);
+            if (document.getElementById('check' + name) && document.getElementById('check' + name).checked) {
+                data[seriesIndex].visible = true;
+            } else {
+                data[seriesIndex].visible = false;
+            }
+            chart.series[seriesIndex].setVisible(data[seriesIndex].visible);
+        }
+
+        function selectAll() {
+            var checkboxes = document.querySelectorAll('input[type=checkbox]:not(#checkAll)');
+            var checkAll = document.getElementById('checkAll');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = checkAll.checked;
+                showHide(checkboxes[i].id.substr(5));
+            }
+        }
+
+        function findSeriesIndex(name) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].name === name) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+    </script>
+</body>
+
+</html>
